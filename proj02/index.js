@@ -51,6 +51,11 @@ const games = [
   },
 ];
 
+//Sortea um número aleatório entre 1 e 7, onde o número 7, que é o tamanho da lista, também está incluso. O número sorteado será o id do jogo a ser jogado e aparecerá com o seu id e o link.
+function randomMinMax(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 //Filtra todas as posições nulls, retornando os não nulls.
 function getGamesValid() {
   return games.filter(Boolean); // Método filter, retorna os não null.
@@ -76,6 +81,18 @@ app.get("/games", (req, res) => {
 // -- ROTA Mostar jogo pelo id
 app.get("/games/:id", (req, res) => {
   const id = parseInt(req.params.id); //Converte o valor que chega por parâmetro para o tipo inteiro
+  const game = getGamesById(id);
+
+  if (!game) {
+    res.send("Jogo não encontrado");
+  } else {
+    res.send(game);
+  }
+});
+
+//Rota Random -- Sugestão de jogo. Sorteia um número de 1 a 7, onde o 7 está incluso nas possibilidades aleatórias.
+app.get("/random-games", (req, res) => {
+  const id = randomMinMax(1, 7);
   const game = getGamesById(id);
 
   if (!game) {
