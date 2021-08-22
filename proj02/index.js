@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 
@@ -7,183 +6,185 @@ const port = 3000;
 // Para trabalhar com json nas requisições
 app.use(express.json());
 
-
-const movies = [
+const games = [
   {
     id: 1,
-    name: "Cães de Guerra",
+    name: "Free Fire",
     imageUrl:
-      "http://s2.glbimg.com/aYkhroi85GIK7_w-bnQiqlI5gQ8=/620x465/s.glbimg.com/jo/g1/f/original/2016/09/08/caes_31UTgUE.jpg",
+      "https://s2.glbimg.com/Fd4E3MNILyMr8GMDSrLj-ze-_Y0=/0x265:1892x1264/984x0/smart/filters:strip_icc()/s.glbimg.com/po/tt2/f/original/2018/04/10/free_fire.png",
   },
   {
     id: 2,
-    name: "Corações de Ferro",
+    name: "FIFA 21",
     imageUrl:
-      "https://www.cineset.com.br/wp-content/uploads/2015/02/fury_movie-wide.jpg",
+      "https://s2.glbimg.com/f5UpJFXD2wQR3-HMNa927HxTd7c=/0x0:1920x1080/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/r/7/mSrPjAQTq0uFHNHiBjpQ/fifa-21-intros.jpg",
   },
   {
     id: 3,
-    name: "Até o Último Homem",
+    name: "Need For Speed",
     imageUrl:
-      "https://brasilguns.com.br/blog/wp-content/uploads/2017/10/hacksaw-ridge-2560x1440-2016-movies-hd-3188-1024x576.jpg",
+      "https://3.bp.blogspot.com/-wdtQj5nuXOI/W_kwgLulm8I/AAAAAAAABNY/EpZ5Vo_NA8skZRJ5ypjV7jMhgwsL2YWFwCLcBGAs/s640/capa.png",
   },
   {
     id: 4,
-    name: "A Conquista da Honra",
+    name: "Tetris",
     imageUrl:
-      "https://www.cinemaescrito.com/wp-content/uploads/2018/09/a-conquista-da-honra-910x515.jpg",
+      "https://boasnovasmg.com.br/wp-content/uploads/2018/11/tetris-696x392.jpeg",
   },
   {
     id: 5,
-    name: "TO Resgate do Soldado Ryan",
+    name: "Battlefield",
     imageUrl:
-      "https://miro.medium.com/max/1400/1*sxJUpbaWdz2fNg73TueQyQ.jpeg",
+      "https://data4.origin.com/asset/content/dam/originx/web/app/games/battlefield/battlefield-4/screenshots/battlefield-4/1010268_screenhi_930x524_en_US_11.jpg/1e88769f-5a6f-4bb5-80fd-fdb4b5ec53ee/original.jpg",
+  },
+  {
+    id: 6,
+    name: "SWAT 4",
+    imageUrl:
+      "https://cdn.ome.lt/0ONj1M0G9Y-zSOzTkrBEmbtpX3U=/770x0/smart/uploads/conteudo/fotos/SWAT_4.jpg",
+  },
+  {
+    id: 7,
+    name: "Microsoft Flight Simulator - PC",
+    imageUrl:
+      "https://s2.glbimg.com/xefZRLocH3R7pCs57lM48gYm0Mw=/0x0:3840x1635/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2020/m/M/40ipBESe6ibdp8iUi0MA/kittyhawk-e3-withlogo-003-2.jpg",
   },
 ];
 
-//Arrow Function para validar
-//const getFilmesValid = () => movies.filter(Boolean);
-
 //Filtra todas as posições nulls, retornando os não nulls.
-function getMoviesValid() {
-  return movies.filter(Boolean); // Retorna os não null.
+function getGamesValid() {
+  return games.filter(Boolean); // Método filter, retorna os não null.
 }
 
 //Recebe um id, filtra as posições nulas. Compara e retorna um objeto para que a invocou.
-const getMoviesById = (id) => getMoviesValid().find((movie) => movie.id === id);
+const getGamesById = (id) => getGamesValid().find((game) => game.id === id);
 
-//Recebe um id, filtra as posições nulas. Procura retornando o Index do obj, onde o id é igual ao parâmetro, retirnando o Index do obj procurado
-const getIndexByMovie = (id) =>
-  getMoviesValid().findIndex((movie) => movie.id === id);
-
-
-
+//Recebe um id. Filtra as posições nulas. Faz comparações, retornando o Índice do obj, onde o id é igual ao parâmetro recebido, e depois retorna o Índice do obj procurado.
+const getIndexByGame = (id) =>
+  getGamesValid().findIndex((game) => game.id === id);
 
 // ---- ROTA INICIAL ------
 app.get("/", (req, res) => {
-  res.send("Hello guys,\n Welcome to My Movie List!");
+  res.send("Welcome to My Games List!");
 });
 
-
-
-
-// -- Rota Mostrar todos os filmes. Posições do Array não nulas
-app.get("/movies", (req, res) => {
-  res.send(movies.filter(Boolean));
+// -- ROTA Mostrar todos os games em que as posições do Array não são nulas
+app.get("/games", (req, res) => {
+  res.send(games.filter(Boolean));
 });
 
-// -- Rota Mostar Filme pelo id
-app.get("/movies/:id", (req, res) => {
+// -- ROTA Mostar jogo pelo id
+app.get("/games/:id", (req, res) => {
   const id = parseInt(req.params.id); //Converte o valor que chega por parâmetro para o tipo inteiro
-  const movie = getMoviesById(id);
+  const game = getGamesById(id);
 
-  if (!movie) {
-    res.send("Filme não encontrado");
+  if (!game) {
+    res.send("Jogo não encontrado");
   } else {
-    res.send(movie);
+    res.send(game);
   }
 });
 
-// rota q cadastra um novo movie
+// ROTA q cadastra um novo jogo
 //Lista - GET
 //Cadastrar - POST
 //Atualizar - PUT
 //Apagar - DELETE
 
-// -- Rota Cadastrar novo movie
-app.post("/movies", (req, res) => {
-  const movie = req.body;
+// -- ROTA Cadastrar novo jogo
+app.post("/games", (req, res) => {
+  const game = req.body;
 
-  //Verifica se o filme e as posições requisitadas no body são vazias ou não.
-  if (!movie || !movie.name || !movie.imageUrl) {
+  //Verifica se o jogo e as posições requisitadas no body são vazias ou não.
+  if (!game || !game.name || !game.imageUrl) {
     res.status(400).send({
-      message: "Filme Inválido. Tente novamente",
+      message: "Jogo Inválido. Tente novamente",
     });
     return;
   }
 
-  //Recupera a posição do último filme
-  const lastMovie = movies[movies.length - 1];
+  //Recupera a posição do último jogo
+  const lastGame = games[games.length - 1];
 
-  //Verifica se há filme, se sim, recebe o id do ultimo filme +1 e atribui como o id do novo filme e coloca-o na lista movies, se não há filme, ele recebe o id 1, pois será o primeiro da lista
-  if (movies.length) {
-    movie.id = lastMovie.id + 1;
-    movies.push(movie);
+  //Verifica se há jogo, se sim, recebe o id do ultimo jogo +1 e atribui como o id do novo jogo e coloca-o na lista games, se não há jogo, ele recebe o id 1, pois será o primeiro da lista
+  if (games.length) {
+    game.id = lastGame.id + 1;
+    games.push(game);
   } else {
-    movie.id = 1;
-    movies.push(movie);
+    game.id = 1;
+    games.push(game);
   }
 
-  // Mostra o id e o nome do filme adicionado
+  // Mostra o id e o nome do jogo adicionado
   res.send(
-    `Filme adicionado com sucesso!\nNome do novo filme: ${movie.name}\nID: ${movie.id}`
+    `Jogo adicionado com sucesso!\nNome do novo jogo: ${game.name}\nID: ${game.id}`
   );
 });
 
-//Rota Atualiza e/ou Edita movie
-app.put("/movies/:id", (req, res) => {
+// -- ROTA Atualiza e/ou Edita o jogo
+app.put("/games/:id", (req, res) => {
   const id = +req.params.id; // converte o id q chega por parâmetro para o tipo inteiro
 
   //Chama a função q passa o id do objeto procurado por parâmetro. A função valida as posições, procura o id entre as posições não nullas do Array, se achar, guarda e retorna o Índice do objeto encontrado.
-  const movieIndex = getIndexByMovie(id);
+  const gameIndex = getIndexByGame(id);
 
-  if (movieIndex < 0) {
+  if (gameIndex < 0) {
     res.status(404).send({
-      message: "O filme não foi encontrado, tente novamente.",
+      message: "O jogo não foi encontrado, tente novamente.",
     });
     return;
   }
 
-  const newMovie = req.body;
+  const newGame = req.body;
 
   //Verifica se as chaves do json NÃO estão com valores para serem passados.
-  if (!Object.keys(newMovie).length) {
+  if (!Object.keys(newGame).length) {
     res.status(400).send({
       message: "O body esta vazio!",
     });
     return;
   }
 
-  //Verifica se o filme e as posições requisitadas no body são vazias ou não.
-  if (!newMovie || !newMovie.name || !newMovie.imageUrl) {
+  //Verifica se o jogo e as posições requisitadas no body são vazias ou não.
+  if (!newGame || !newGame.name || !newGame.imageUrl) {
     res.status(400).send({
-      message: "Filme invalido, tente novamente.",
+      message: "Jogo invalido, tente novamente.",
     });
     return;
   }
 
-  //Chama a função que irá validar as posições e procurar o filme com base no id passado por parâmeto, retornando o obj.
-  const movie = getMoviesById(id);
+  //Chama a função que irá validar as posições e procurar o jogo com base no id passado por parâmeto, retornando o obj.
+  const game = getGamesById(id);
 
-  //Aquiu o índice é retornado pela função getIndexByMovie(id)e  é usado para fazer a troca dos filmes
-  movies[movieIndex] = {
-    ...movie,
-    ...newMovie,
+  //Aquiu o índice é retornado pela função getIndexByGame(id)e  é usado para fazer a troca dos jogos
+  games[gameIndex] = {
+    ...game,
+    ...newGame,
   };
 
-  res.send(movies[movieIndex]);
+  res.send(games[gameIndex]);
 });
 
-//Rota Deletar movie
-app.delete("/movies/:id", (req, res) => {
+// -- ROTA Deletar jogo recebendo o id
+app.delete("/games/:id", (req, res) => {
   const id = +req.params.id;
 
-  const movieIndex = getIndexByMovie(id); //Função já explicada na rota anterior. Retorna o índice do elemento encontrado, se encontrar.
+  const gameIndex = getIndexByGame(id); //Função já explicada na rota anterior. Retorna o índice do elemento encontrado, se encontrar.
 
-  if (movieIndex < 0) {
+  if (gameIndex < 0) {
     res.status(404).send({
-      message: "Filme não encontrado, ....",
+      message: "Jogo não encontrado, ....",
     });
     return;
   }
 
-  //Guardo o objeto de forma temporária apenas para mostrar ao usuário o filme que foi deletado.
-  const movieDeleted = movies[movieIndex];
+  //Guardo o objeto de forma temporária apenas para mostrar ao usuário o jogo que foi deletado.
+  const gameDeleted = games[gameIndex];
 
-  //Remove 1 movie pelo índice encontrado pela função getIndexBymovie(id) no início do da rota.
-  movies.splice(movieIndex, 1);
+  //Remove 1 jogo pelo índice encontrado pela função getIndexByGame(id) no início do da rota.
+  games.splice(gameIndex, 1);
   res.send({
-    message: `Filme ${movieDeleted.name} removido com sucesso`,
+    message: `Jogo ${gameDeleted.name} removido com sucesso`,
   });
 });
 
