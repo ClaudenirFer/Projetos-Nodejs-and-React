@@ -1,0 +1,9 @@
+div#root {
+    justify-content: center;
+    text-align: center;
+    
+}
+
+html {
+    scroll-behavior: smooth;
+  }

@@ -1,0 +1,30 @@
+.App {
+  
+  margin: 0px auto 0px auto;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 80%;
+  
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: rgb(104 104 104 / 20%) 0px 8px 24px;
+}
+
+#init {
+  width: 100%;
+  background-color: #343536;
+  box-shadow: rgb(104 104 104 / 20%) 0px 8px 24px;  
+}
+
+
+
+
+footer {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+  background-color: #343536;
+  color: #fff;
+  width: 100%;
+  padding: 35px;
+  margin-top: 60px;
+}
