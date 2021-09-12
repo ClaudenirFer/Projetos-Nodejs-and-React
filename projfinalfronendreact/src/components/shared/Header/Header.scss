@@ -1,0 +1,27 @@
+@import '../../../style/_colors.scss';
+@import '../../../style/style.scss';
+
+.header {    
+    background-color: $color-secondary;
+    color: $color-primary;
+    .container {
+        @include container;
+    }
+    &-list {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        &-item {
+            color: $color-primary;
+            padding: 1% 2%;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.4s all;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
