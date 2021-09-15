@@ -1,18 +1,16 @@
 import React from 'react';
-import './Home.scss'
+import './Home.scss';
 import TaskList from '../../components/structure/TaskList/TaskList';
 
 const Home = () => {
-    return (
-        <section className="content">
-            <h1 className="content-title"> listagem da música </h1>
-            <div className="content-list">
+  return (
+    <section className="content">
+      <h1 className="content-title"> Tarefas do Dia </h1>
+      <div className="content-list">
+        <TaskList/>
+      </div>
+    </section>
+  );
+};
 
-               <TaskList />
-               
-            </div>
-        </section>
-    )
-}
-
-export default Home
+export default Home;

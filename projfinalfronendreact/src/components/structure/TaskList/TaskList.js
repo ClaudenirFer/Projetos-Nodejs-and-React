@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import TaskCard from '../TaskCard/TaskCard';
-import './TaskList.scss';
+import React, { useEffect, useState } from "react";
+import TaskCard from "../TaskCard/TaskCard";
+import "./TaskList.scss";
+import { Api } from "../../../api/api";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -9,10 +10,9 @@ const TaskList = () => {
     getTask();
   }, []);
 
-  const url = 'http://localhost:3001/tasks';
-
+  
   const getTask = async () => {
-    const response = await fetch(url);
+    const response = await Api.fetchGet();
     const data = await response.json();
     setTasks(data);
   };
@@ -20,7 +20,7 @@ const TaskList = () => {
   return (
     <div className="list">
       {tasks.map((task, index) => (
-        <TaskCard task={task} key={task._id}/>
+        <TaskCard task={task} key={task._id} />
       ))}
     </div>
   );

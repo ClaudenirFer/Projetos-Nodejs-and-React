@@ -1,17 +1,24 @@
-import React from "react";
-import "./TaskCard.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './TaskCard.scss';
 
 const TaskCard = (props) => {
     const task = props.task;
   return (
-    <div className="card">
-      <div className="card-img">
-        <img src="https://picsum.photos/300/300?random" alt="" />
-      </div>
+        
+    <Link to={`/view/${task._id}`} className="card">
+      
+      <div>
+      
+        <div className="card-img">        
+          
+        </div>
 
-      <p className="card-text"> {task.title} </p>
-      <span className="card-info"> Testando </span>
-    </div>
+        <p className="card-text"> {task.task} </p>
+        <p className="card-text"> {task.description} </p>
+        <span className="card-info"> Detalhes </span>
+      </div>
+    </Link>
   );
 };
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const taskModel = mongoose.Schema({
-  title: { type: String, required: true },
+  task: { type: String, required: true },
   description: { type: String, required: true },
   priorities: { type: String, required: true },
   taskStaus: { type: String, required: true },
