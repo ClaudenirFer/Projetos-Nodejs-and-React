@@ -38,7 +38,7 @@ const TaskEdit = (props) => {
 
     return (
         <section className="add">
-            <h1> Editar Tarefa - Nome da Tarefa </h1>
+            <h1> Editar Tarefa </h1>
             <form className="add-form" onSubmit={handleSubmit}>
                 <div className="add-form-group">                    
                     <label htmlFor="task" className="add-form-group-label"> Tarefa: </label>
